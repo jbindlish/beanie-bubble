@@ -81,7 +81,7 @@ export default function App(){
             <div className="logo" aria-label="eBay throwback">
               <span className="e">e</span><span className="b">b</span><span className="a">a</span><span className="y">y</span>
             </div>
-            <div className="slogan">The world&apos;s online marketplace — circa late 1990s (school project)</div>
+            <div className="slogan">The world&apos;s online marketplace — based in the late 1990s</div>
           </div>
         </div>
         <div className="nav">
@@ -166,7 +166,7 @@ export default function App(){
 
         {/* Footer */}
         <div className="footer">
-          Student project — throwback design inspired by late-90s eBay. No affiliation with Ty Inc. or eBay.
+          Jai Bindlish Real History Project — design spin off from late-90s eBay. No affiliation with Ty Inc. or eBay.
         </div>
       </div>
 
@@ -192,7 +192,7 @@ export default function App(){
                 <div>
                   <div style={{fontWeight:700, marginBottom:6}}>Description</div>
                   <div style={{marginBottom:8}}>
-                    Classic collectible from the late-1990s Beanie craze. See price collapse from peak to present.
+                    Classic stuffed toy collectible from the late-1990s Beanie Baby fad. Visualize the price collapse from the 90s to now - crase of the Speculative Bubble.
                   </div>
 
                   <div style={{fontWeight:700, margin:'10px 0 6px'}}>Fun Facts</div>
