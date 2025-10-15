@@ -166,7 +166,7 @@ export default function App(){
 
         {/* Footer */}
         <div className="footer">
-          Jai's project — throwback design spin-off of late-90s eBay. No affiliation with Ty Inc. or eBay.
+          Jai Bindlish Real History Project — throwback design spin-off of late-90s eBay. No affiliation with Ty Inc. or eBay.
         </div>
       </div>
 
