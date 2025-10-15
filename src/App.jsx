@@ -1,27 +1,27 @@
 import React, { useMemo, useState } from 'react'
 
 const DATA = [
-  { id:'princess-diana-bear', name:'Princess (Diana Bear)', img:'https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1000w,f_avif,q_auto:eco,dpr_2/rockcms/2022-08/princess-diana-purple-beanie-baby-te-220803-0b9792.jpg', category:'Bear', releaseYear:1997, peakYear:1998, peakPriceUSD:45000, currentPriceUSD:50, rarity:'Hype Icon',
+  { id:'princess-diana-bear', name:'Princess (Diana Bear)', img:'https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1000w,f_avif,q_auto:eco,dpr_2/rockcms/2022-08/princess-diana-purple-beanie-baby-te-220803-0b9792.jpg', category:'Bear', releaseYear:1997, peakYear:1998, peakPriceUSD:45000, currentPriceUSD:25, rarity:'Hype Icon',
     fun:["This toy was released as commemerative of Princess Diana's death. The shipments were limited - only 12 toys per store, driving up demand immensely. One of the signature Beanie Babies."],
     notes:"The peak was derived from headlines and other potential exaggerated estimates - real prices might have been lower."
   },
-  { id:'peanut-royal-blue', name:'Peanut (Royal Blue)', img:'', category:'Elephant', releaseYear:1000, peakYear:1000, peakPriceUSD:1000, currentPriceUSD:5, rarity:'X',
+  { id:'peanut-royal-blue', name:'Peanut (Royal Blue)', img:'', category:'Elephant', releaseYear:1995, peakYear:1998, peakPriceUSD:3000, currentPriceUSD:40, rarity:'Color Variant',
     fun:["XXXXXXXXXXXXXX"],
     notes:"XXXXXXXXXXXXXX"
   },
-  { id:'brownie-cubbie', name:'Brownie/Cubbie', img:'', category:'Bear', releaseYear:1000, peakYear:1000, peakPriceUSD:1000, currentPriceUSD:5, rarity:'X',
+  { id:'brownie-cubbie', name:'Brownie/Cubbie', img:'', category:'Bear', releaseYear:1993, peakYear:1997, peakPriceUSD:1500, currentPriceUSD:12, rarity:'Name Change',
     fun:["XXXXXXXXXXXXXX"],
     notes:"XXXXXXXXXXXXXX"
   },
-  { id:'patti-magenta', name:'Patti (Magenta)', img:'', category:'Platypus', releaseYear:1000, peakYear:1000, peakPriceUSD:5, currentPriceUSD:0000, rarity:'X',
+  { id:'patti-magenta', name:'Patti (Magenta)', img:'', category:'Platypus', releaseYear:1993, peakYear:1997, peakPriceUSD:900, currentPriceUSD:10, rarity:'Color Variant',
     fun:["XXXXXXXXXXXXXX"],
     notes:"XXXXXXXXXXXXXX."
   },
-  { id:'garcia-bear', name:'Garcia', img:'', category:'Bear', releaseYear:1000, peakYear:1000, peakPriceUSD:1000, currentPriceUSD:5, rarity:'X',
+  { id:'garcia-bear', name:'Garcia', img:'', category:'Bear', releaseYear:1996, peakYear:1998, peakPriceUSD:1000, currentPriceUSD:18, rarity:'Tie-Dye',
     fun:["XXXXXXXXXXXXXX"],
     notes:"XXXXXXXXXXXXXX"
   },
-  { id:'nana-bongo', name:'Nana/Bongo', img:'', category:'Monkey', releaseYear:1000, peakYear:1000, peakPriceUSD:1000, currentPriceUSD:5, rarity:'X',
+  { id:'nana-bongo', name:'Nana/Bongo', img:'', category:'Monkey', releaseYear:1995, peakYear:1997, peakPriceUSD:800, currentPriceUSD:9, rarity:'Name Change',
     fun:["XXXXXXXXXXXXXX"],
     notes:"XXXXXXXXXXXXXX"
   },
