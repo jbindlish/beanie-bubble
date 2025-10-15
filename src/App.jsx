@@ -9,19 +9,19 @@ const DATA = [
     fun:["XXXXXXXXXXXXXX"],
     notes:"XXXXXXXXXXXXXX"
   },
-  { id:'brownie-cubbie', name:'Brownie/Cubbie', img:'', category:'Bear', releaseYear:0000, peakYear:0000, peakPriceUSD:0000, currentPriceUSD:0000, rarity:'X',
+  { id:'brownie-cubbie', name:'Brownie/Cubbie', img:'', category:'Bear', releaseYear:1000, peakYear:1000, peakPriceUSD:1000, currentPriceUSD:5, rarity:'X',
     fun:["XXXXXXXXXXXXXX"],
     notes:"XXXXXXXXXXXXXX"
   },
-  { id:'patti-magenta', name:'Patti (Magenta)', img:'', category:'Platypus', releaseYear:0000, peakYear:0000, peakPriceUSD:0000, currentPriceUSD:0000, rarity:'X',
+  { id:'patti-magenta', name:'Patti (Magenta)', img:'', category:'Platypus', releaseYear:1000, peakYear:1000, peakPriceUSD:5, currentPriceUSD:0000, rarity:'X',
     fun:["XXXXXXXXXXXXXX"],
     notes:"XXXXXXXXXXXXXX."
   },
-  { id:'garcia-bear', name:'Garcia', img:'', category:'Bear', releaseYear:0000, peakYear:0000, peakPriceUSD:0000, currentPriceUSD:0000, rarity:'X',
+  { id:'garcia-bear', name:'Garcia', img:'', category:'Bear', releaseYear:1000, peakYear:1000, peakPriceUSD:1000, currentPriceUSD:5, rarity:'X',
     fun:["XXXXXXXXXXXXXX"],
     notes:"XXXXXXXXXXXXXX"
   },
-  { id:'nana-bongo', name:'Nana/Bongo', img:'', category:'Monkey', releaseYear:0000, peakYear:0000, peakPriceUSD:0000, currentPriceUSD:0000, rarity:'X',
+  { id:'nana-bongo', name:'Nana/Bongo', img:'', category:'Monkey', releaseYear:1000, peakYear:1000, peakPriceUSD:1000, currentPriceUSD:5, rarity:'X',
     fun:["XXXXXXXXXXXXXX"],
     notes:"XXXXXXXXXXXXXX"
   },
