@@ -5,7 +5,7 @@ const DATA = [
     fun:["This toy was released as commemerative of Princess Diana's death. The shipments were limited - only 12 toys per store, driving up demand immensely. One of the signature Beanie Babies."],
     notes:"The peak was derived from headlines and other potential exaggerated estimates - real prices might have been lower."
   },
-  { id:'peanut-royal-blue', name:'Peanut (Royal Blue)', img:'', category:'Elephant', releaseYear:0000, peakYear:0000, peakPriceUSD:0000, currentPriceUSD:0000, rarity:'X',
+  { id:'peanut-royal-blue', name:'Peanut (Royal Blue)', img:'', category:'Elephant', releaseYear:1000, peakYear:1000, peakPriceUSD:1000, currentPriceUSD:5, rarity:'X',
     fun:["XXXXXXXXXXXXXX"],
     notes:"XXXXXXXXXXXXXX"
   },
