@@ -4,10 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beanie Bubble Exchange</title>
-    <link rel="stylesheet" href="/src/styles.css" />
+    <!-- Removed hard-coded stylesheet link. Import styles from src/main.jsx instead so Vite bundles and rewrites the path using the configured base -->
   </head>
   <body>
     <div id="root"></div>
+    <!-- Vite dev entry — keep this. On build Vite rewrites the script and assets to include the base (/beanie-bubble/) -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
