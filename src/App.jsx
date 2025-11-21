@@ -46,6 +46,10 @@ export default function App(){
   const [open, setOpen] = useState(false);
   const [sel, setSel] = useState(null);
 
+  // page state: 'browse' shows the listing (same UI as before),
+  // other values are simple pages: 'categories', 'sell', 'my-ebay', 'learn'
+  const [page, setPage] = useState('browse');
+
   const rows = useMemo(() => {
     let r = DATA.filter(d => {
       const text = `${d.name} ${d.category} ${d.rarity}`.toLowerCase();
@@ -72,6 +76,18 @@ export default function App(){
     return r;
   }, [q, cat, sort, dir]);
 
+  // Helper to render the nav button with active state
+  const NavBtn = ({ id, children }) => (
+    <button
+      className={`nav-btn ${id === 'browse' ? 'blue' : id === 'categories' ? 'yellow' : id === 'sell' ? 'red' : id === 'my-ebay' ? 'green' : 'nav-learn'}`}
+      onClick={() => setPage(id)}
+      aria-current={page === id ? 'page' : undefined}
+      style={page === id ? { outline: '3px solid rgba(0,0,0,0.08)' } : {}}
+    >
+      {children}
+    </button>
+  );
+
   return (
     <>
       {/* Header */}
@@ -86,91 +102,146 @@ export default function App(){
         </div>
         <div className="nav">
           <div className="wrap nav-row">
-            <div className="nav-btn blue">Browse</div>
-            <div className="nav-btn yellow">Categories</div>
-            <div className="nav-btn red">Sell</div>
-            <div className="nav-btn green">My eBay</div>
-            <div className="nav-spacer" />
+            <NavBtn id="browse">Browse</NavBtn>
+            <NavBtn id="categories">Categories</NavBtn>
+            <NavBtn id="sell">Sell</NavBtn>
+            <NavBtn id="my-ebay">My eBay</NavBtn>
+            <div style={{flex:1}} />
+            <div style={{alignSelf:'center'}}>
+              <button className="nav-learn" onClick={() => setPage('learn')} style={{background:'transparent', border:'none', cursor:'pointer', color:'#222', textDecoration: page==='learn' ? 'underline' : 'none'}}>Learn</button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Search / Filters Panel */}
       <div className="wrap">
-        <div className="panel">
-          <div className="form-row">
-            <label>Search:&nbsp;</label>
-            <input className="input" placeholder="Find Beanies…" value={q} onChange={e=>setQ(e.target.value)} />
-            <label>&nbsp;Category:&nbsp;</label>
-            <select className="select" value={cat} onChange={e=>setCat(e.target.value)}>
-              {categories.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-            <label>&nbsp;Sort:&nbsp;</label>
-            <select className="select" value={sort} onChange={e=>setSort(e.target.value)}>
-              {sorts.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
-            </select>
-            <button className="btn" onClick={()=>setDir(d => d==='asc'?'desc':'asc')}>Order: {dir.toUpperCase()}</button>
-          </div>
-        </div>
+        {/* Page: Browse (original UI) */}
+        {page === 'browse' && (
+          <>
+            {/* Search / Filters Panel */}
+            <div className="panel">
+              <div className="form-row">
+                <label>Search:&nbsp;</label>
+                <input className="input" placeholder="Find Beanies…" value={q} onChange={e=>setQ(e.target.value)} />
+                <label>&nbsp;Category:&nbsp;</label>
+                <select className="select" value={cat} onChange={e=>setCat(e.target.value)}>
+                  {categories.map(c => <option key={c} value={c}>{c}</option>)}
+                </select>
+                <label>&nbsp;Sort:&nbsp;</label>
+                <select className="select" value={sort} onChange={e=>setSort(e.target.value)}>
+                  {sorts.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+                </select>
+                <button className="btn" onClick={()=>setDir(d => d==='asc'?'desc':'asc')}>Order: {dir.toUpperCase()}</button>
+              </div>
+            </div>
 
-        {/* Listings Table */}
-        <div className="table-wrap">
-          <table className="table">
-            <thead>
-              <tr>
-                <th width="180">Photo</th>
-                <th>Title / Details</th>
-                <th width="220">Price</th>
-                <th width="120">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map(d => {
-                const drop = pctDrop(d.peakPriceUSD, d.currentPriceUSD);
-                return (
-                  <tr key={d.id}>
-                    <td>
-                      {d.img
-                        ? <img className="thumb" src={d.img} alt={d.name} />
-                        : <div className="thumb" />}
-                    </td>
-                    <td>
-                      <div className="item-title"><a href="#" onClick={(e)=>{e.preventDefault(); setSel(d); setOpen(true);}}>{d.name}</a>
-                        <span className="badge">{d.rarity}</span>
-                      </div>
-                      <div className="item-meta">{d.category} • Released {d.releaseYear} • Peak year {d.peakYear}</div>
-                      <div className="item-meta">
-                        <a href="#" onClick={(e)=>{e.preventDefault(); setSel(d); setOpen(true);}}>View description</a>
-                      </div>
-                    </td>
-                    <td className="price-block">
-                      <div>Peak: <span className="money">{money(d.peakPriceUSD)}</span></div>
-                      <div>Now: <span className="money">{money(d.currentPriceUSD)}</span> &nbsp; <span className="drop">-{drop}%</span></div>
-                      <div style={{marginTop:6}}>
-                        <div className="bar"><div style={{width:`${Math.max(5, Math.round((d.currentPriceUSD / Math.max(1, d.peakPriceUSD))*100))}%`}} /></div>
-                      </div>
-                    </td>
-                    <td>
-                      <div style={{display:'grid', gap:6}}>
-                        <button className="btn" onClick={()=>{ setSel(d); setOpen(true); }}>Bid Now</button>
-                        <button className="btn" onClick={()=>{ setSel(d); setOpen(true); }}>Details</button>
-                        <a href="#" onClick={(e)=>e.preventDefault()}>Watch this item</a>
-                      </div>
-                    </td>
+            {/* Listings Table */}
+            <div className="table-wrap">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th width="180">Photo</th>
+                    <th>Title / Details</th>
+                    <th width="220">Price</th>
+                    <th width="120">Action</th>
                   </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
+                </thead>
+                <tbody>
+                  {rows.map(d => {
+                    const drop = pctDrop(d.peakPriceUSD, d.currentPriceUSD);
+                    return (
+                      <tr key={d.id}>
+                        <td>
+                          {d.img
+                            ? <img className="thumb" src={d.img} alt={d.name} />
+                            : <div className="thumb" />}
+                        </td>
+                        <td>
+                          <div className="item-title"><a href="#" onClick={(e)=>{e.preventDefault(); setSel(d); setOpen(true);}}>{d.name}</a>
+                            <span className="badge">{d.rarity}</span>
+                          </div>
+                          <div className="item-meta">{d.category} • Released {d.releaseYear} • Peak year {d.peakYear}</div>
+                          <div className="item-meta">
+                            <a href="#" onClick={(e)=>{e.preventDefault(); setSel(d); setOpen(true);}}>View description</a>
+                          </div>
+                        </td>
+                        <td className="price-block">
+                          <div>Peak: <span className="money">{money(d.peakPriceUSD)}</span></div>
+                          <div>Now: <span className="money">{money(d.currentPriceUSD)}</span> &nbsp; <span className="drop">-{drop}%</span></div>
+                          <div style={{marginTop:6}}>
+                            <div className="bar"><div style={{width:`${Math.max(5, Math.round((d.currentPriceUSD / Math.max(1, d.peakPriceUSD))*100))}%`}} /></div>
+                          </div>
+                        </td>
+                        <td>
+                          <div style={{display:'grid', gap:6}}>
+                            <button className="btn" onClick={()=>{ setSel(d); setOpen(true); }}>Bid Now</button>
+                            <button className="btn" onClick={()=>{ setSel(d); setOpen(true); }}>Details</button>
+                            <a href="#" onClick={(e)=>e.preventDefault()}>Watch this item</a>
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
 
-        {/* Footer */}
-        <div className="footer">
-          Jai Bindlish Real History Project — design spin off from late-90s eBay. No affiliation with Ty Inc. or eBay.
-        </div>
+            {/* Footer */}
+            <div className="footer">
+              Jai Bindlish Real History Project — design spin off from late-90s eBay. No affiliation with Ty Inc. or eBay.
+            </div>
+          </>
+        )}
+
+        {/* Page: Categories */}
+        {page === 'categories' && (
+          <div style={{maxWidth:900, margin:'2rem auto', padding:'0 1rem'}}>
+            <h1>Categories</h1>
+            <p>Click a category to view items in that category.</p>
+            <div style={{display:'flex', gap:8, flexWrap:'wrap', marginTop:12}}>
+              {categories.map(c => (
+                <button key={c} className="btn" onClick={() => { setCat(c); setPage('browse'); }}>
+                  {c}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Page: Sell */}
+        {page === 'sell' && (
+          <div style={{maxWidth:900, margin:'2rem auto', padding:'0 1rem'}}>
+            <h1>Sell</h1>
+            <p>Placeholder Sell page — describe how to list an item here, or wire up a form to accept a new listing.</p>
+            <div style={{marginTop:12}}>
+              <button className="btn" onClick={() => alert('Sell flow not implemented in this demo')}>Start listing</button>
+            </div>
+          </div>
+        )}
+
+        {/* Page: My eBay */}
+        {page === 'my-ebay' && (
+          <div style={{maxWidth:900, margin:'2rem auto', padding:'0 1rem'}}>
+            <h1>My eBay</h1>
+            <p>Placeholder for My eBay — saved items, bids, and account info would appear here.</p>
+          </div>
+        )}
+
+        {/* Page: Learn */}
+        {page === 'learn' && (
+          <article style={{ maxWidth: 900, margin: "2rem auto", padding: "0 1rem", lineHeight: 1.6 }}>
+            <h1>Learn</h1>
+            <section>
+              <p>
+                This is the Learn page — paste your essay here. You can replace this paragraph
+                with plain text, JSX elements, images, or formatted sections. For long essays, break into sections using headings (<code>h2</code>, <code>h3</code>) for readability.
+              </p>
+            </section>
+          </article>
+        )}
       </div>
 
-      {/* Dialog */}
+      {/* Dialog (keeps working as before) */}
       <dialog className="dialog" open={open} onClose={()=>setOpen(false)}>
         <div className="titlebar">
           {sel ? sel.name : 'Listing'}
