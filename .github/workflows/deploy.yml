@@ -31,15 +31,13 @@ jobs:
       - name: Build Project
         run: npm run build
 
-      # --- FIX FOR DEPRECATED V3 ERROR ---
       - name: Upload Build Artifact (v4)
-        # We are using the newest standard artifact uploader (v4) to guarantee no deprecated components are used.
+        # Using the newest standard artifact uploader (v4) to avoid V3 deprecation
         uses: actions/upload-artifact@v4
         with:
-          # Naming the artifact 'github-pages' allows the deploy-pages action to automatically find it.
+          # Naming the artifact 'github-pages' for the deploy-pages action
           name: github-pages 
           path: ./dist
-      # ----------------------------------
 
   deploy:
     needs: build
@@ -50,5 +48,5 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        # The deploy action remains @v4, and will automatically pick up the 'github-pages' artifact.
+        # Deploy action remains @v4, automatically picking up the 'github-pages' artifact
         uses: actions/deploy-pages@v4
